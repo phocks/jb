@@ -23,6 +23,12 @@ const Layout: FC<LayoutProps> = (props) => {
     <html lang="en">
       <head>
         <title>{props.title}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="Joshua Byrd"></meta>
+        <meta
+          name="description"
+          content="The personal website of Joshua Byrd."
+        ></meta>
       </head>
       <body>{props.children}</body>
     </html>
