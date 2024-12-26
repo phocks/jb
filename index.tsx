@@ -40,4 +40,4 @@ app.get("/", (c) => {
   return c.html(<Top />);
 });
 
-Deno.serve(app.fetch);
+Deno.serve({ port: 3000 }, app.fetch);
