@@ -13,31 +13,41 @@ const app = new Hono();
 app.use("*", logger(), poweredBy());
 app.all("/favicon.ico", serveStatic({ path: "./public/favicon.ico" }));
 
-type Props = {
+type LayoutProps = {
   title: string;
   children?: any;
 };
 
-const Layout = (props: Props) => html`<!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <title>${props.title}</title>
-    </head>
-    <body>
-      ${props.children}
-    </body>
-  </html>`;
-
-const Top: FC = () => {
+const Layout: FC<LayoutProps> = (props) => {
   return (
-    <Layout title="JB">
-      <p>Hello World!</p>
-    </Layout>
+    <html lang="en">
+      <head>
+        <title>{props.title}</title>
+      </head>
+      <body>{props.children}</body>
+    </html>
+  );
+};
+
+const Shell = (props: { children: any }) => {
+  return html`<!DOCTYPE html>
+    <html lang="en">
+      ${props.children}
+    </html>`;
+};
+
+const App: FC = () => {
+  return (
+    <Shell>
+      <Layout title="JB">
+        <p>Hello World!</p>
+      </Layout>
+    </Shell>
   );
 };
 
 app.get("/", (c) => {
-  return c.html(<Top />);
+  return c.html(<App />);
 });
 
-Deno.serve({ port: 3000 }, app.fetch);
+Deno.serve({ port: 1337 }, app.fetch);
