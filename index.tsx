@@ -6,6 +6,7 @@ import { Hono } from "hono";
 import { serveStatic } from "hono/deno";
 import { logger } from "hono/logger";
 import { poweredBy } from "hono/powered-by";
+import { html } from "hono/html";
 
 const app = new Hono();
 
@@ -17,16 +18,15 @@ type Props = {
   children?: any;
 };
 
-const Layout: FC<Props> = (props) => {
-  return (
-    <html>
-      <head>
-        <title>{props.title}</title>
-      </head>
-      <body>{props.children}</body>
-    </html>
-  );
-};
+const Layout = (props: Props) => html`<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <title>${props.title}</title>
+    </head>
+    <body>
+      ${props.children}
+    </body>
+  </html>`;
 
 const Top: FC = () => {
   return (
