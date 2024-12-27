@@ -52,7 +52,7 @@ const App: FC = () => {
   );
 };
 
-app.get("/", (c) => {
+app.get("/", (c: any) => {
   return c.html(<App />);
 });
 
